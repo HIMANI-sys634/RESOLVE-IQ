@@ -1,0 +1,163 @@
+{
+  "version": "1.0.0",
+  "description": "Deterministic policy rules for the Student 3 decision engine. All critical business actions are resolved here, never by the LLM.",
+  "issue_aliases": {
+    "refund request": "Refund",
+    "refund": "Refund",
+    "refunds": "Refund",
+    "late delivery": "Late Delivery",
+    "delivery delay": "Late Delivery",
+    "delayed delivery": "Late Delivery",
+    "shipping delay": "Late Delivery",
+    "damaged product": "Damaged Product",
+    "damaged item": "Damaged Product",
+    "broken item": "Damaged Product",
+    "product damaged": "Damaged Product",
+    "missing information": "Missing Information",
+    "incomplete complaint": "Missing Information"
+  },
+  "issue_policies": {
+    "Damaged Product": {
+      "required_fields": ["customer_id", "order_id"],
+      "allowed_actions": [
+        "Offer Return/Replacement",
+        "Human Review",
+        "Request Missing Information"
+      ],
+      "rules": [
+        {
+          "when": { "return_window_open": true },
+          "action": "Offer Return/Replacement",
+          "reason": "The order is delivered and the return window is open, so a return or a replacement can be offered.",
+          "escalate": false
+        },
+        {
+          "when": { "return_window_open": false },
+          "action": "Human Review",
+          "reason": "The return window is closed, so a human agent must review the damaged-product claim.",
+          "escalate": true
+        }
+      ],
+      "default_action": "Human Review",
+      "default_reason": "The damaged-product request did not match a supported policy rule, so it needs manual review."
+    },
+    "Late Delivery": {
+      "required_fields": ["customer_id", "order_id"],
+      "allowed_actions": [
+        "Investigate Delivery",
+        "Human Review",
+        "Request Missing Information"
+      ],
+      "rules": [
+        {
+          "when": { "order_status": "In Transit" },
+          "action": "Investigate Delivery",
+          "reason": "The parcel is still in transit past its expected delivery date, so the carrier record must be investigated.",
+          "escalate": false
+        },
+        {
+          "when": { "order_status": "Delivered" },
+          "action": "Investigate Delivery",
+          "reason": "The order is marked delivered while the customer reports a delay, so the delivery record must be investigated.",
+          "escalate": false
+        }
+      ],
+      "default_action": "Investigate Delivery",
+      "default_reason": "A delivery timeline check is required for this late-delivery complaint."
+    },
+    "Refund": {
+      "required_fields": ["customer_id", "order_id"],
+      "allowed_actions": [
+        "Check Refund Eligibility",
+        "Inform Refund Confirmed",
+        "Human Review",
+        "Request Missing Information"
+      ],
+      "rules": [
+        {
+          "when": { "refund_confirmed": true },
+          "action": "Inform Refund Confirmed",
+          "reason": "The backend confirms that the refund has already been issued.",
+          "escalate": false
+        },
+        {
+          "when": { "refund_confirmed": false },
+          "action": "Check Refund Eligibility",
+          "reason": "No refund is confirmed in the backend, so eligibility must be verified before any refund is promised.",
+          "escalate": false
+        }
+      ],
+      "default_action": "Check Refund Eligibility",
+      "default_reason": "Refund eligibility must always be verified against backend records."
+    },
+    "Missing Information": {
+      "required_fields": ["customer_id", "order_id"],
+      "allowed_actions": ["Request Missing Information", "Human Review"],
+      "rules": [],
+      "default_action": "Request Missing Information",
+      "default_reason": "Essential information is missing from the complaint, so more details are required."
+    }
+  },
+  "default_policy": {
+    "required_fields": ["customer_id", "order_id"],
+    "allowed_actions": ["Human Review", "Request Missing Information"],
+    "rules": [],
+    "default_action": "Human Review",
+    "default_reason": "The issue type is not covered by an automated policy, so a human agent must review it."
+  },
+  "escalation": {
+    "high_severity_levels": ["High", "Critical"],
+    "escalate_on_high_severity": true,
+    "high_risk_issue_types": ["Fraud", "Account Security", "Legal Threat", "Chargeback", "Identity Theft"],
+    "escalate_on_data_conflict": true,
+    "escalate_on_high_risk_customer": true,
+    "vip_tiers_always_escalate": false,
+    "forbidden_actions": [
+      "Issue Refund",
+      "Process Refund",
+      "Delete Account",
+      "Cancel Order",
+      "Share Card Details"
+    ]
+  },
+  "missing_information": {
+    "action": "Request Missing Information",
+    "escalate_if_any_of": ["customer_id", "order_id"],
+    "escalate_reason": "Critical identifiers are missing, so the case cannot be resolved automatically.",
+    "messages": {
+      "customer_id": "Please share the customer or account identifier linked to this complaint.",
+      "order_id": "Please share your order number so we can locate the purchase."
+    }
+  },
+  "guardrails": {
+    "forbidden_refund_claims": [
+      "refund has been issued",
+      "refund issued",
+      "refund was issued",
+      "your refund has been processed",
+      "refund has been processed",
+      "refund has already been processed",
+      "we have refunded",
+      "money has been returned",
+      "refund is on its way",
+      "refunded your"
+    ],
+    "forbidden_completion_claims": [
+      "has been shipped",
+      "has been cancelled",
+      "order has been cancelled",
+      "replacement has been shipped",
+      "we have cancelled",
+      "has already been completed"
+    ],
+    "internal_markers": [
+      "escalate_reason",
+      "guardrail",
+      "severity:",
+      "cluster:",
+      "policy_version",
+      "deterministic_decision"
+    ],
+    "max_customer_message_length": 900
+  }
+}
