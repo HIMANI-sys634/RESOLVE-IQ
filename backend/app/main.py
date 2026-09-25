@@ -2,7 +2,7 @@ from fastapi import FastAPI
 
 from .database import Base, engine
 from . import models  # noqa: F401  (ensures models are registered before create_all)
-from .routes import complaints, orders, customers, auth
+from .routes import complaints, orders, customers, auth, intelligence
 # Creates tables on startup if they don't exist yet.
 Base.metadata.create_all(bind=engine)
 
@@ -16,6 +16,7 @@ app.include_router(customers.router)
 app.include_router(orders.router)
 app.include_router(complaints.router)
 app.include_router(auth.router)
+app.include_router(intelligence.router)
 
 
 @app.get("/")
