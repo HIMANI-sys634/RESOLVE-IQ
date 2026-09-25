@@ -10,7 +10,6 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [navOpen, setNavOpen] = useState(false);
 
-  // Close the mobile drawer automatically on route change.
   useEffect(() => {
     setNavOpen(false);
   }, [pathname]);
@@ -19,8 +18,10 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     <div className="min-h-screen bg-bg">
       <Sidebar />
       <MobileNav open={navOpen} onClose={() => setNavOpen(false)} />
+
       <div className="md:pl-60">
         <Topbar onMenuClick={() => setNavOpen(true)} />
+
         <main
           key={pathname}
           className="animate-fade-in-up px-4 py-6 sm:px-6"
