@@ -1,3 +1,5 @@
+import os
+import re
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -12,12 +14,19 @@ app = FastAPI(
     description="Stores complaints/orders/customers and exposes APIs for the rest of the team.",
     version="1.0.0",
 )
+
+# Allow origins: localhost + any onrender.com subdomain + custom ALLOWED_ORIGINS
+allow_origins = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    re.compile(r"https://.*\.onrender\.com"),
+]
+if os.getenv("ALLOWED_ORIGINS"):
+    allow_origins.extend(os.getenv("ALLOWED_ORIGINS").split(","))
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
-    ],
+    allow_origins=allow_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

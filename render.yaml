@@ -2,7 +2,8 @@ services:
   - type: web
     name: resolve-iq-backend
     env: python
-    buildCommand: pip install -r backend/requirements.txt
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: DATABASE_URL
@@ -18,7 +19,8 @@ services:
   - type: web
     name: resolve-iq-ai-agent
     env: python
-    buildCommand: pip install -r ai_agent/requirements.txt
+    rootDir: ai_agent
+    buildCommand: pip install -r requirements.txt
     startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: BACKEND_URL
@@ -28,8 +30,9 @@ services:
   - type: web
     name: resolve-iq-frontend
     env: static
-    buildCommand: cd customer-support-ai-frontend-signin-ready && npm install && npm run build
-    staticPublishPath: customer-support-ai-frontend-signin-ready/dist
+    rootDir: customer-support-ai-frontend-signin-ready
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
     envVars:
       - key: VITE_API_BASE_URL
         value: https://resolve-iq-backend.onrender.com
