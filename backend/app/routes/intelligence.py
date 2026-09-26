@@ -5,11 +5,12 @@ from ..database import get_db
 from .. import models
 
 import sys
+from pathlib import Path
 
-STUDENT2_PATH = r"C:\Users\mohit\Downloads\Backend\student2_intelligence\student2-intelligence"
+STUDENT2_PATH = Path(__file__).resolve().parents[3] / "student2_intelligence" / "student2-intelligence"
 
-if STUDENT2_PATH not in sys.path:
-    sys.path.insert(0, STUDENT2_PATH)
+if str(STUDENT2_PATH) not in sys.path:
+    sys.path.insert(0, str(STUDENT2_PATH))
 
 from main import analyze_complaints
 
