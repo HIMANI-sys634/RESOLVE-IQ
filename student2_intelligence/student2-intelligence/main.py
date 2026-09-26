@@ -535,7 +535,7 @@ def _print_demo(result: Dict[str, Any]) -> None:
 
 def main(argv: Optional[Sequence[str]] = None) -> int:
     """Command-line entry point. Returns a process exit code."""
-    parser = argparse.ArgumentParser(description="Student 2 — Customer Support Intelligence Engine")
+    parser = argparse.ArgumentParser(description="Student 2 — RESOLVE IQ Intelligence Engine")
     parser.add_argument("--file", default=None, help="Path to complaints JSON (default: data/complaints.json)")
     parser.add_argument("--output", default=None, help="Where to write the JSON output")
     parser.add_argument("--demo-only", action="store_true", help="Run only the 3 demo complaints")

@@ -1,6 +1,6 @@
 # Student 2 — Intelligence Engine
 
-Part of the **Customer Support AI** hackathon project.
+Part of the **RESOLVE IQ** hackathon project.
 
 Student 2 turns raw customer complaints into **structured, machine-readable intelligence** that Student 3 (AI agent) and Student 4 (dashboard) consume without ever touching the internals of this module.
 
@@ -8,7 +8,7 @@ Student 2 turns raw customer complaints into **structured, machine-readable inte
 
 ## 1. Project overview
 
-A customer support system receives thousands of free-text complaints. Raw text is not actionable: you cannot chart it, alert on it, or reason over it.
+A RESOLVE IQ system receives thousands of free-text complaints. Raw text is not actionable: you cannot chart it, alert on it, or reason over it.
 
 This module is the **Intelligence Engine**: it takes raw complaints and produces a single JSON document answering six questions:
 
@@ -424,4 +424,4 @@ Pass `include_embeddings=False` when the dashboard does not need the scatter plo
 
 ## License
 
-Built for the Customer Support AI hackathon. Add your team's license here before publishing.
+Built for the RESOLVE IQ hackathon. Add your team's license here before publishing.

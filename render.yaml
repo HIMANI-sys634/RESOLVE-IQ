@@ -1,0 +1,49 @@
+services:
+  - type: pserv
+    name: resolve-iq-db
+    plan: free
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: resolve-iq-db
+          property: connectionString
+
+  - type: web
+    name: resolve-iq-backend
+    env: python
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: resolve-iq-db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ACCESS_TOKEN_EXPIRE_MINUTES
+        value: "60"
+    autoDeploy: true
+
+  - type: web
+    name: resolve-iq-ai-agent
+    env: python
+    buildCommand: pip install -r ai_agent/requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: BACKEND_URL
+        value: https://resolve-iq-backend.onrender.com
+    autoDeploy: true
+
+  - type: web
+    name: resolve-iq-frontend
+    env: static
+    buildCommand: cd customer-support-ai-frontend-signin-ready && npm install && npm run build
+    staticPublishPath: customer-support-ai-frontend-signin-ready/dist
+    envVars:
+      - key: VITE_API_BASE_URL
+        value: https://resolve-iq-backend.onrender.com
+    autoDeploy: true
+
+databases:
+  - name: resolve-iq-db
+    plan: free

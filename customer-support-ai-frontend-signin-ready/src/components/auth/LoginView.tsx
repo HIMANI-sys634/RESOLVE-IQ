@@ -45,9 +45,9 @@ export const LoginView: React.FC<LoginViewProps> = ({ onNavigate, onSuccess }) =
       <header className="auth-header">
         <button className="auth-brand" onClick={() => onNavigate('landing')} aria-label="Back to intro experience">
           <BrandMark />
-          <span>
-            <strong>CUSTOMER SUPPORT</strong>
-            <small>INTELLIGENCE &amp; RESOLUTION</small>
+<span>
+            <strong>RESOLVE IQ</strong>
+            <small>INTELLIGENCE & RESOLUTION</small>
           </span>
         </button>
 
@@ -74,8 +74,8 @@ export const LoginView: React.FC<LoginViewProps> = ({ onNavigate, onSuccess }) =
             <div className="auth-icon-wrap" aria-hidden="true">
               <LockKeyhole size={16} />
             </div>
-            <h1 id="auth-title">Welcome back.</h1>
-            <p>Sign in to continue to the Customer Support Intelligence &amp; Resolution workspace.</p>
+<h1 id="auth-title">Welcome back.</h1>
+            <p>Sign in to continue to the RESOLVE IQ Intelligence & Resolution workspace.</p>
           </div>
 
           <form onSubmit={handleSubmit} className="auth-form">

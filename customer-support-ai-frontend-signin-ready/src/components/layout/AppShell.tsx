@@ -99,7 +99,7 @@ export const AppShell: React.FC<AppShellProps> = ({
             </div>
             <div>
               <span className="text-sm tracking-[-0.02em] font-normal text-white">
-                Customer Support
+                RESOLVE IQ
               </span>
               <p className="text-[10px] font-mono text-[#9a9a9a]">Intelligence & Resolution</p>
             </div>

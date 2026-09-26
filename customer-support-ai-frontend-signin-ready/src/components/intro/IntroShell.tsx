@@ -71,9 +71,9 @@ export const IntroShell: React.FC<IntroShellProps> = ({ onEnterApp }) => {
           <span className="intro-brand-mark" aria-hidden="true">
             <span className="intro-brand-dot" />
           </span>
-          <span>
-            <strong>CUSTOMER SUPPORT</strong>
-            <small>INTELLIGENCE &amp; RESOLUTION</small>
+<span>
+            <strong>RESOLVE IQ</strong>
+            <small>INTELLIGENCE & RESOLUTION</small>
           </span>
         </button>
 

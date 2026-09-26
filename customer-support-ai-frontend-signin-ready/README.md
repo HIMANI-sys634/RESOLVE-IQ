@@ -1,4 +1,4 @@
-# Customer Support — Student 4 Frontend
+# RESOLVE IQ — Student 4 Frontend
 
 Frontend implementation for the AI Customer Intelligence + Resolution Agent. The root route is a Dala-inspired, scroll-driven 3D particle story; the operational product remains under `/app/*`.
 
@@ -8,7 +8,7 @@ Frontend implementation for the AI Customer Intelligence + Resolution Agent. The
 - One persistent Three.js WebGL particle field with real x/y/z depth, perspective, slow object motion, ambient triangle particles, and smooth scroll-controlled morphing.
 - Product storytelling text that appears with a restrained pop-in animation as each scene enters the viewport.
 - Minimal intro header: brand + Enter Application. No scene-navigation bar.
-- Customer complaint, case, analytics, approval, authentication and dashboard interfaces.
+- RESOLVE IQ complaint, case, analytics, approval, authentication and dashboard interfaces.
 - Typed contracts, mock repository and service layer ready for backend integration.
 
 ## Run

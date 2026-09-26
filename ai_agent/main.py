@@ -9,7 +9,7 @@ BACKEND_URL = "http://127.0.0.1:8000"
 
 
 app = FastAPI(
-    title="Customer Support AI — Decision Engine",
+    title="RESOLVE IQ — Decision Engine",
     description="AI Agent for complaint decisioning and customer-support response generation.",
     version="1.0.0",
 )
@@ -18,7 +18,7 @@ app = FastAPI(
 @app.get("/")
 def root():
     return {
-        "message": "Customer Support AI — AI Agent",
+        "message": "RESOLVE IQ — AI Agent",
         "status": "running",
         "version": "1.0.0",
         "documentation": "/docs",

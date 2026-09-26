@@ -196,7 +196,7 @@ export default function App() {
     );
   }
 
-  // 3. Operational Customer Support Application
+  // 3. Operational RESOLVE IQ Application
   if (!isAuthenticated()) {
     return (
       <ToastProvider>

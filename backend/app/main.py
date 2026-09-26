@@ -8,7 +8,7 @@ from .routes import complaints, orders, customers, auth, intelligence
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
-    title="Customer Support AI — Backend",
+    title="RESOLVE IQ — Backend",
     description="Stores complaints/orders/customers and exposes APIs for the rest of the team.",
     version="1.0.0",
 )
@@ -33,7 +33,7 @@ app.include_router(intelligence.router)
 @app.get("/")
 def root():
     return {
-        "message": "Customer Support AI API",
+        "message": "RESOLVE IQ API",
         "status": "running",
         "version": "1.0.0",
         "documentation": "/docs",
