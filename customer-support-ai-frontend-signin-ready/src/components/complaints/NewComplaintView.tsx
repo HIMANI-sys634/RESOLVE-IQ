@@ -19,8 +19,8 @@ interface NewComplaintViewProps {
 export const NewComplaintView: React.FC<NewComplaintViewProps> = ({ onNavigate }) => {
   const { showToast } = useToast();
   const [complaintText, setComplaintText] = useState('');
-  const [customerId, setCustomerId] = useState('CUST-001');
-  const [orderId, setOrderId] = useState('ORD-501');
+  const [customerId, setCustomerId] = useState('U101');
+  const [orderId, setOrderId] = useState('O501');
   const [channel, setChannel] = useState<'web' | 'email' | 'mobile' | 'whatsapp'>('web');
   const [attachmentName, setAttachmentName] = useState<string | null>(null);
 
@@ -97,8 +97,8 @@ export const NewComplaintView: React.FC<NewComplaintViewProps> = ({ onNavigate }
             onClick={() =>
               handleSampleClick(
                 'My wireless headphones arrived with a cracked hinge and audio fails in the left ear. Need a replacement.',
-                'ORD-501',
-                'CUST-001'
+                'O501',
+                'U101'
               )
             }
             className="text-xs px-3 py-1.5 rounded-full bg-[#111111] border border-[#222222] text-[#bdbdbd] hover:text-white hover:border-[#8052ff] transition-colors"
@@ -110,9 +110,9 @@ export const NewComplaintView: React.FC<NewComplaintViewProps> = ({ onNavigate }
             type="button"
             onClick={() =>
               handleSampleClick(
-                'I was charged twice on my card for order ORD-505 ($310.00 each) when the payment gateway timed out. Please reverse the second hold immediately.',
-                'ORD-505',
-                'CUST-005'
+                'I was charged twice on my card for order O501 ($310.00 each) when the payment gateway timed out. Please reverse the second hold immediately.',
+                'O501',
+                'U101'
               )
             }
             className="text-xs px-3 py-1.5 rounded-full bg-[#111111] border border-[#222222] text-[#bdbdbd] hover:text-white hover:border-[#ffb829] transition-colors"
@@ -124,9 +124,9 @@ export const NewComplaintView: React.FC<NewComplaintViewProps> = ({ onNavigate }
             type="button"
             onClick={() =>
               handleSampleClick(
-                'Order ORD-507 has been cancelled for over 8 business days, but the $1,250 refund has not hit my bank account.',
-                'ORD-507',
-                'CUST-007'
+                'Order O501 has been cancelled for over 8 business days, but the $1,250 refund has not hit my bank account.',
+                'O501',
+                'U101'
               )
             }
             className="text-xs px-3 py-1.5 rounded-full bg-[#111111] border border-[#222222] text-[#bdbdbd] hover:text-white hover:border-[#8052ff] transition-colors"
